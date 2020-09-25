@@ -33,8 +33,8 @@ def create_policy(env):
 def first_visit_monte_carlo_policy_evaluation(env, policy=None):
 
     """
-    Given a fixed policy, estimate the Value function associated with that policy.
-    Returns estimate of V*(s), for all s in S
+    Given a fixed, stochastic policy, estimate the Value function associated with that policy.
+    Returns estimate of V_pi(s), for all s in S
     """
 
     if policy is None:
@@ -97,8 +97,8 @@ def first_visit_monte_carlo_policy_evaluation(env, policy=None):
 def every_visit_monte_carlo_policy_evaluation(env, policy=None):
 
     """
-    Given a fixed policy, estimate the Value function associated with that policy.
-    Returns estimate of V*(s), for all s in S
+    Given a fixed, stochastic policy, estimate the Value function associated with that policy.
+    Returns estimate of V_pi(s), for all s in S
     """
 
     if policy is None:
