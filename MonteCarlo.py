@@ -63,7 +63,7 @@ def first_visit_monte_carlo_policy_evaluation(env, policy=None):
         for t, (s, a, r) in enumerate(memory[::-1]):  # goes from T-1 to 0
             returns_through_end_of_episode += r
 
-            earlier_states = [sar[0] for sar in memory[0:t]]
+            earlier_states = [sar[0] for sar in memory[0:len(memory)-t-1]]
 
             if s not in earlier_states:
                 returns[s] += returns_through_end_of_episode

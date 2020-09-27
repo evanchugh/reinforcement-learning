@@ -39,7 +39,6 @@ def TD0(env, policy=None, alpha=0.01, gamma=1.0):
 
     # env.render()
     env.close()
-
     return v_pi
 
 

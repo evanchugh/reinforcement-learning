@@ -2,7 +2,7 @@
 Contains utility functions for interacting with an environment.
 """
 
-N_EPISODES = 10000
+N_EPISODES = 10_000
 TS_PER_EPISODE = 500
 
 
