@@ -1,33 +1,17 @@
+"""
+Tabular Monte Carlo algorithms for Value function approximation.
+Implemented for OpenAI-Gym FrozenLake-v0 environment.
+"""
+
 import numpy as np
 import gym
+
+from util import create_policy, N_EPISODES, TS_PER_EPISODE
 
 LEFT = 0
 DOWN = 1
 RIGHT = 2
 UP = 3
-
-N_EPISODES = 1000
-TS_PER_EPISODE = 500
-
-
-def print_env_info(env):
-    print(f'Action space: {env.action_space}')
-    print(f'Observation space: {env.observation_space}')
-    print(f'Size of Observation space: {env.observation_space.n}')
-
-
-def create_policy(env):
-    """
-    Returns a policy where in every state, there is a 25% chance for each action to occur (left, down, right, up).
-    """
-    policy = {}
-    for state in range(0, env.observation_space.n):
-        current_end = 0
-        p = {}
-        for action in range(0, env.action_space.n):
-            p[action] = 1 / env.action_space.n
-        policy[state] = p
-    return policy
 
 
 def first_visit_monte_carlo_policy_evaluation(env, policy=None):
@@ -130,6 +114,7 @@ def every_visit_monte_carlo_policy_evaluation(env, policy=None):
 
             if done:
                 # print(f'Episode {e} finished after {t + 1} timesteps')
+                # print(f'Visited: {visited}')
                 # print(f'Memory: {memory}')
                 break
 
@@ -155,7 +140,6 @@ if __name__ == '__main__':
 
     env = gym.make('FrozenLake-v0', is_slippery=False)
 
-    # print_env_info(env)
-    est_v = every_visit_monte_carlo_policy_evaluation(env)
+    est_v = first_visit_monte_carlo_policy_evaluation(env)
     print(f'Estimated value-function for policy: {est_v}')
 
