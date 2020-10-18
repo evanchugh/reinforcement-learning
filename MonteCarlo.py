@@ -7,12 +7,7 @@ On policy (ie. the agent is using the policy that is being evaluated.)
 import numpy as np
 import gym
 
-from util import create_policy, N_EPISODES, TS_PER_EPISODE
-
-LEFT = 0
-DOWN = 1
-RIGHT = 2
-UP = 3
+from util import create_policy, N_EPISODES, MAX_TS_PER_EPISODE
 
 
 def first_visit_monte_carlo_policy_evaluation(env, policy=None):
@@ -36,7 +31,7 @@ def first_visit_monte_carlo_policy_evaluation(env, policy=None):
 
         obs = env.reset()
 
-        for t in range(TS_PER_EPISODE):
+        for t in range(MAX_TS_PER_EPISODE):
 
             if obs not in visited:
                 visited.append(obs)
@@ -99,7 +94,7 @@ def every_visit_monte_carlo_policy_evaluation(env, policy=None):
 
         obs = env.reset()
 
-        for t in range(TS_PER_EPISODE):
+        for t in range(MAX_TS_PER_EPISODE):
 
             sar = [obs]  # state, action, reward
 

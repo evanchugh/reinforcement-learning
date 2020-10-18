@@ -1,7 +1,7 @@
 import numpy as np
 import gym
 
-from util import create_policy, N_EPISODES, TS_PER_EPISODE
+from util import create_policy, N_EPISODES, MAX_TS_PER_EPISODE
 
 
 def TD0(env, policy=None, alpha=0.01, gamma=1.0):
@@ -19,7 +19,7 @@ def TD0(env, policy=None, alpha=0.01, gamma=1.0):
 
         obs = env.reset()
 
-        for t in range(TS_PER_EPISODE):
+        for t in range(MAX_TS_PER_EPISODE):
 
             # env.render()
 
