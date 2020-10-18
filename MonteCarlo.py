@@ -1,6 +1,7 @@
 """
 Tabular Monte Carlo algorithms for Value function approximation.
 Implemented for OpenAI-Gym FrozenLake-v0 environment.
+On policy (ie. the agent is using the policy that is being evaluated.)
 """
 
 import numpy as np
@@ -140,6 +141,9 @@ if __name__ == '__main__':
 
     env = gym.make('FrozenLake-v0', is_slippery=False)
 
-    est_v = first_visit_monte_carlo_policy_evaluation(env)
-    print(f'Estimated value-function for policy: {est_v}')
+    est_v1 = first_visit_monte_carlo_policy_evaluation(env)
+    est_v2 = every_visit_monte_carlo_policy_evaluation(env)
+
+    print(f'Estimated value-function for policy: {est_v1}')
+    print(f'Estimated value-function for policy: {est_v2}')
 
