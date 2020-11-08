@@ -7,7 +7,7 @@ Off-policy.
 import numpy as np
 import gym
 
-from util import N_EPISODES, MAX_TS_PER_EPISODE, epsilon_greedy, follow_greedy_policy
+from util import N_EPISODES, MAX_TS_PER_EPISODE, epsilon_greedy_discrete, follow_greedy_policy_discrete
 
 
 def q_learning(env, alpha=0.1, gamma=0.9, epsilon=0.5):
@@ -24,14 +24,14 @@ def q_learning(env, alpha=0.1, gamma=0.9, epsilon=0.5):
     for e in range(N_EPISODES):
 
         s = env.reset()
-        a = epsilon_greedy(Q, s, env, epsilon)
+        a = epsilon_greedy_discrete(Q, s, env, epsilon)
 
         for i in range(MAX_TS_PER_EPISODE):
             # env.render()
 
             s_, reward, done, _ = env.step(a)
 
-            a_ = epsilon_greedy(Q, s_, env, epsilon)
+            a_ = epsilon_greedy_discrete(Q, s_, env, epsilon)
 
             Q[s, a] += alpha * (reward + gamma * Q[s_, a_] - Q[s, a])
 
@@ -59,7 +59,7 @@ def double_q_learning(env, alpha=0.1, gamma=0.9, epsilon=0.5):
             # env.render()
 
             sumQ = Q1 + Q2
-            a = epsilon_greedy(sumQ, s, env, epsilon)
+            a = epsilon_greedy_discrete(sumQ, s, env, epsilon)
 
             s_, reward, done, _ = env.step(a)
 
@@ -90,5 +90,5 @@ if __name__ == '__main__':
     # print(f'Approximation of Q*: {q_star1}')
 
     q_star2 = double_q_learning(env)
-    follow_greedy_policy(env, q_star2)
+    follow_greedy_policy_discrete(env, q_star2)
     # print(f'Approximation of Q*: {q_star2}')
