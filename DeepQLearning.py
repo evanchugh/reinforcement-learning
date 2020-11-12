@@ -76,7 +76,7 @@ def act(state, epsilon, policy_network):
     return np.argmax(q_values[0])
 
 
-def deep_q_learning_cartpole(env, n_episodes=100, max_timesteps=300):
+def deep_q_learning_cartpole(env, n_episodes=100, max_timesteps=500):
     replay_memory = deque(maxlen=REPLAY_MEMORY_SIZE)
 
     policy_network = get_cartpole_model(env)
@@ -126,10 +126,10 @@ def deep_q_learning_cartpole(env, n_episodes=100, max_timesteps=300):
 
 
 if __name__ == '__main__':
-    env = gym.make('CartPole-v0')
+    env = gym.make('CartPole-v1')
 
     # policy = deep_q_learning_cartpole(env)
     # policy.save('cartpole_model')
 
     # follow_greedy_policy(env, get_cartpole_model(env))
-    follow_greedy_policy(env, keras.models.load_model('cartpole_model'))
+    follow_greedy_policy(env, keras.models.load_model('models/cartpole_model'))
