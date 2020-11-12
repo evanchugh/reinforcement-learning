@@ -7,7 +7,23 @@ On policy (ie. the agent is using the policy that is being evaluated.)
 import numpy as np
 import gym
 
-from util import create_policy, N_EPISODES, MAX_TS_PER_EPISODE
+
+N_EPISODES = 1000
+MAX_TS_PER_EPISODE = 100
+
+
+def create_policy(env):
+    """
+    Returns a stochastic policy where in every state, there is an equal chance for each action to occur.
+    """
+    policy = {}
+    for state in range(0, env.observation_space.n):
+        current_end = 0
+        p = {}
+        for action in range(0, env.action_space.n):
+            p[action] = 1 / env.action_space.n
+        policy[state] = p
+    return policy
 
 
 def first_visit_monte_carlo_policy_evaluation(env, policy=None):

@@ -6,7 +6,11 @@ On-policy.
 
 import numpy as np
 import gym
-from util import N_EPISODES, MAX_TS_PER_EPISODE, epsilon_greedy_discrete, follow_greedy_policy_discrete
+from util import epsilon_greedy_discrete, follow_greedy_policy_discrete
+
+
+N_EPISODES = 1000
+MAX_TS_PER_EPISODE = 100
 
 
 def sarsa_policy_iteration(env, alpha=0.1, gamma=0.9, epsilon=0.5):
@@ -47,6 +51,6 @@ if __name__ == '__main__':
 
     env = gym.make('FrozenLake-v0', is_slippery=False)
 
-    q_star = sarsa_policy_iteration(env)  # approximation
-    follow_greedy_policy_discrete(env, q_star)
+    # q_star = sarsa_policy_iteration(env)  # approximation
+    # follow_greedy_policy_discrete(env, q_star)
     # print(f'Approximation of Q*: {q_star}')
