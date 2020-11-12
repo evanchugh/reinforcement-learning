@@ -62,7 +62,7 @@ def epsilon_greedy(model, s, env, epsilon):
     if np.random.random() <= epsilon:  # choose random exploratory action
         return np.random.randint(0, env.action_space.n)
     else:  # choose greedy action
-        pred = model.predict(np.array([s]))
+        pred = model.predict(s)
         return np.argmax(pred)
 
 
