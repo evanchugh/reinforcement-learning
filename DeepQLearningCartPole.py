@@ -125,6 +125,6 @@ if __name__ == '__main__':
 
     # policy = deep_q_learning_cartpole(env)
 
-    policy = keras.models.load_model(MODEL_SAVEPATH)
+    policy = keras.models.load_model('models/CartPoleDeepQLearning-11.12.2020')
 
     follow_greedy_policy(env, policy)
