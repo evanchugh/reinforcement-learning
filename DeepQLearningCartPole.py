@@ -3,6 +3,7 @@ import random
 from datetime import datetime
 from collections import deque
 import gym
+from gym import wrappers
 import keras
 from keras import layers
 import tensorflow as tf
@@ -122,9 +123,10 @@ def deep_q_learning_cartpole(env, pretrained_model=None, n_episodes=150, max_tim
 
 if __name__ == '__main__':
     env = gym.make('CartPole-v1')
+    env = wrappers.Monitor(env, './demos/CartPole/')
 
     # policy = deep_q_learning_cartpole(env)
 
-    policy = keras.models.load_model('models/CartPoleDeepQLearning-11.12.2020')
+    policy = keras.models.load_model('./models/CartPoleDeepQLearning-11.12.2020')
 
     follow_greedy_policy(env, policy)
