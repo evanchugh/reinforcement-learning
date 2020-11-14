@@ -1,3 +1,10 @@
+"""
+Deep Q-Learning implementation for the CartPole environment. This concept allows the agent to
+make decisions in states it has never exactly experienced through the use of function approximation
+with neural networks. This approach is useful for environments where the state space is extremely
+large or continuous.
+"""
+
 import numpy as np
 import random
 from datetime import datetime
@@ -6,13 +13,12 @@ import gym
 from gym import wrappers
 import keras
 from keras import layers
-import tensorflow as tf
 
 from util import epsilon_greedy, follow_greedy_policy
 
-MODEL_SAVEPATH = f'models/CartPoleDeepQLearning-{datetime.now().strftime("%m.%d.%Y")}'
+MODEL_SAVEPATH = f'./models/CartPoleDeepQLearning-{datetime.now().strftime("%m.%d.%Y")}'
 
-model_checkpoint = tf.keras.callbacks.ModelCheckpoint(
+model_checkpoint = keras.callbacks.ModelCheckpoint(
     filepath=MODEL_SAVEPATH,
     monitor='acc',
     mode='auto',
@@ -31,6 +37,7 @@ ALPHA = 0.01
 MINIBATCH_SIZE = 16
 TARGET_NETWORK_UPDATE_INTERVAL = 5  # episodes
 
+
 def get_cartpole_model(env):
     model = keras.models.Sequential([
         layers.Dense(24, activation='relu', input_shape=(4,)),
@@ -40,6 +47,7 @@ def get_cartpole_model(env):
 
     model.compile(optimizer=keras.optimizers.Adam(lr=ALPHA), loss='mse', metrics=['acc'])
     return model
+
 
 def train(replay_memory, policy_network, target_network):
     if len(replay_memory) >= MINIBATCH_SIZE:
@@ -67,6 +75,7 @@ def train(replay_memory, policy_network, target_network):
         q_val_mb = np.array(q_val_mb).reshape(MINIBATCH_SIZE, -1)
 
         policy_network.fit(state_mb, q_val_mb, callbacks=[model_checkpoint], verbose=0)
+
 
 def deep_q_learning_cartpole(env, pretrained_model=None, n_episodes=150, max_timesteps=500):
     replay_memory = deque(maxlen=REPLAY_MEMORY_SIZE)
@@ -123,10 +132,10 @@ def deep_q_learning_cartpole(env, pretrained_model=None, n_episodes=150, max_tim
 
 if __name__ == '__main__':
     env = gym.make('CartPole-v1')
-    env = wrappers.Monitor(env, './demos/CartPole/')
+    # env = wrappers.Monitor(env, './demos/CartPole/')
 
-    # policy = deep_q_learning_cartpole(env)
+    policy = deep_q_learning_cartpole(env)
 
-    policy = keras.models.load_model('./models/CartPoleDeepQLearning-11.12.2020')
+    # policy = keras.models.load_model('./models/CartPoleDeepQLearning-11.12.2020')
 
-    follow_greedy_policy(env, policy)
+    # follow_greedy_policy(env, policy)

@@ -16,7 +16,7 @@ def print_env_info(env):
     print(f'Size of Action space: {env.action_space.n}')
 
     print(f'Observation space: {env.observation_space}')
-    print(f'Size of Observation space: {env.observation_space.n}')
+    print(f'Size of Observation space: {env.observation_space.shape}')
 
 # DISCRETE -------------------------------------------------------------------------------------------
 def greedy(Q, s):
