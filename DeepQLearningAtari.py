@@ -10,13 +10,12 @@ import gym
 from gym import wrappers
 import keras
 from keras import layers
-import tensorflow as tf
 
 from util import epsilon_greedy, follow_greedy_policy, print_env_info
 
 MODEL_SAVEPATH = f'models/BreakoutDeepQLearning-{datetime.now().strftime("%m.%d.%Y")}'
 
-model_checkpoint = tf.keras.callbacks.ModelCheckpoint(
+model_checkpoint = keras.callbacks.ModelCheckpoint(
     filepath=MODEL_SAVEPATH,
     monitor='acc',
     mode='auto',
